@@ -67,3 +67,6 @@ const port = 3000;
 app.listen(port, () => {
   console.log("API server is listening on port 3000");
 });
+
+// Export the Express API
+module.exports = app;
