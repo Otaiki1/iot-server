@@ -8,7 +8,8 @@ contract ContractApi {
         uint id;
         string temperature;
         string humidity;
-        string location;
+        string latitude;
+        string longtitude;
     }
 
     mapping(string => Detail) public details;
@@ -22,11 +23,13 @@ contract ContractApi {
         string memory _identifier,
         string memory _temperature,
         string memory _humidity,
-        string memory _location
+        string memory _latitude,
+        string memory _longtitude
     ) public {
         details[_identifier].temperature = _temperature;
         details[_identifier].humidity = _humidity;
-        details[_identifier].location = _location;
+        details[_identifier].latitude = _latitude;
+        details[_identifier].latitude = _longtitude;
     }
 
     function getLogInfo(

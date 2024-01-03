@@ -31,29 +31,35 @@ app.get("/logger/:id", async (req, res) => {
   }
 });
 
-app.post("/start", async (req, res) => {
-  try {
-    const { identifier } = req.body;
-    const tx = await contractInstance.startLogging(String(identifier), {
-      gasLimit: 10000000,
-    });
-    await tx.wait();
-    res.json({ success: true });
-  } catch (error) {
-    res.status(500).send(error.message);
-  }
-});
+// app.post("/start", async (req, res) => {
+//   try {
+//     const { identifier } = req.body;
+//     const tx = await contractInstance.startLogging(String(identifier), {
+//       gasLimit: 10000000,
+//     });
+//     await tx.wait();
+//     res.json({ success: true });
+//   } catch (error) {
+//     res.status(500).send(error.message);
+//   }
+// });
 
-app.put("/log/:id", async (req, res) => {
+app.post("/log", async (req, res) => {
   //http://localhost:3000/products/1
   try {
-    const identifier = req.params.id;
-    const { temperature, humidity, location } = req.body;
+    const { data, temperature, humidity, latitude, longtitude } = req.body;
+
+    const tx1 = await contractInstance.startLogging(String(data), {
+      gasLimit: 10000000,
+    });
+    await tx1.wait();
+
     const tx = await contractInstance.log(
-      String(identifier),
-      temperature,
-      humidity,
-      location,
+      String(data),
+      String(temperature),
+      String(humidity),
+      lString(latitude),
+      String(longtitude),
       { gasLimit: 10000000 }
     );
     await tx.wait();
