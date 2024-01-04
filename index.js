@@ -58,7 +58,7 @@ app.post("/log", async (req, res) => {
       String(data),
       String(temperature),
       String(humidity),
-      lString(latitude),
+      String(latitude),
       String(longtitude),
       { gasLimit: 10000000 }
     );
